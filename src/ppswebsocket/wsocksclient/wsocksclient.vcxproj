@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{55021B52-265B-404E-ADE8-F3997217C6B7}</ProjectGuid>
+    <ProjectGuid>{1D213CAD-B9D0-43D1-A0D4-9F728CEE596C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ppswebsockets</RootNamespace>
+    <RootNamespace>QuotesReceive</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>wsockserver</ProjectName>
+    <ProjectName>wsocksclient</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -73,20 +73,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(TargetName)</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(TargetName)</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(TargetName)</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(TargetName)\</IntDir>
+    <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\$(TargetName)</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -95,13 +99,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)thirdparty\websocketpp\;$(SolutionDir)thirdparty\libopenssl\include\;$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\websocketpp;$(SolutionDir)thirdparty\libopenssl\include</AdditionalIncludeDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libeay32.lib;ssleay32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -112,13 +117,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)thirdparty\websocketpp\;$(SolutionDir)thirdparty\libopenssl\include\;$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\websocketpp;$(SolutionDir)thirdparty\libopenssl\include</AdditionalIncludeDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libeay32.lib;ssleay32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -131,15 +137,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)thirdparty\websocketpp\;$(SolutionDir)thirdparty\libopenssl\include\;$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\websocketpp;$(SolutionDir)thirdparty\libopenssl\include</AdditionalIncludeDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libeay32.lib;ssleay32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -152,15 +159,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)thirdparty\websocketpp\;$(SolutionDir)thirdparty\libopenssl\include\;$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\websocketpp;$(SolutionDir)thirdparty\libopenssl\include</AdditionalIncludeDirectories>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)thirdparty\libopenssl\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libeay32.lib;ssleay32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -169,9 +177,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="wsockserver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -218,6 +223,7 @@
     <Import Project="..\packages\boost_wserialization-vc140.1.68.0.0\build\boost_wserialization-vc140.targets" Condition="Exists('..\packages\boost_wserialization-vc140.1.68.0.0\build\boost_wserialization-vc140.targets')" />
     <Import Project="..\packages\boost_zlib-vc140.1.68.0.0\build\boost_zlib-vc140.targets" Condition="Exists('..\packages\boost_zlib-vc140.1.68.0.0\build\boost_zlib-vc140.targets')" />
     <Import Project="..\packages\boost-vc140.1.68.0.0\build\boost-vc140.targets" Condition="Exists('..\packages\boost-vc140.1.68.0.0\build\boost-vc140.targets')" />
+    <Import Project="..\packages\zlib.v140.windesktop.msvcstl.static.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.static.rt-dyn.targets" Condition="Exists('..\packages\zlib.v140.windesktop.msvcstl.static.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.static.rt-dyn.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -266,5 +272,6 @@
     <Error Condition="!Exists('..\packages\boost_wserialization-vc140.1.68.0.0\build\boost_wserialization-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_wserialization-vc140.1.68.0.0\build\boost_wserialization-vc140.targets'))" />
     <Error Condition="!Exists('..\packages\boost_zlib-vc140.1.68.0.0\build\boost_zlib-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_zlib-vc140.1.68.0.0\build\boost_zlib-vc140.targets'))" />
     <Error Condition="!Exists('..\packages\boost-vc140.1.68.0.0\build\boost-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost-vc140.1.68.0.0\build\boost-vc140.targets'))" />
+    <Error Condition="!Exists('..\packages\zlib.v140.windesktop.msvcstl.static.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.static.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zlib.v140.windesktop.msvcstl.static.rt-dyn.1.2.8.8\build\native\zlib.v140.windesktop.msvcstl.static.rt-dyn.targets'))" />
   </Target>
 </Project>

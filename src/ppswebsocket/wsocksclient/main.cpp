@@ -1,4 +1,4 @@
-#include "wsockclient.h"
+#include "wsocksclient.h"
 
 int main(int argc, char* argv[]) 
 {
@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 	return 0;
 	}*/
 
-	wsockclient_main(argc, argv);
+	wsocksclient_main(argc, argv);
 
 	return 0;
 }

@@ -1,12 +1,12 @@
 #pragma once
 
-#include <wsockserver.h>
+#include <wsocksserver.h>
 
 int main(int argc, char ** argv)
 {
 	int result = 0;
 
-	wsockserver_main();
+	wsocksserver_main();
 
 	return result;
 }

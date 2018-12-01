@@ -30,7 +30,7 @@ typedef class_asio_tls_server asio_tls_server;
 typedef class_asio_no_tls_server asio_no_tls_server;
 
 template <typename EndpointType>
-class CWsockServer {
+class CWsocksServer {
 
 	// See https://wiki.mozilla.org/Security/Server_Side_TLS for more details about
 	// the TLS modes. The code below demonstrates how to implement both the modern
@@ -41,7 +41,7 @@ class CWsockServer {
 
 public:
 
-	CWsockServer() {
+	CWsocksServer() {
 		// Reset the log channels
 		m_endpoint.clear_access_channels(websocketpp::log::alevel::all);
 		m_endpoint.clear_error_channels(websocketpp::log::elevel::all);
@@ -56,22 +56,22 @@ public:
 		// Register handler callbacks
 		if (typeid(typename EndpointType) != typeid(asio_no_tls_server))
 		{
-			m_endpoint.set_tls_init_handler(websocketpp::lib::bind(&CWsockServer::on_tls_init_sslv23, this, websocketpp::lib::placeholders::_1));
+			m_endpoint.set_tls_init_handler(websocketpp::lib::bind(&CWsocksServer::on_tls_init_sslv23, this, websocketpp::lib::placeholders::_1));
 		}
-		m_endpoint.set_socket_init_handler(websocketpp::lib::bind(&CWsockServer::on_socket_init_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_fail_handler(websocketpp::lib::bind(&CWsockServer::on_fail_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_open_handler(websocketpp::lib::bind(&CWsockServer::on_open_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_close_handler(websocketpp::lib::bind(&CWsockServer::on_close_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_http_handler(websocketpp::lib::bind(&CWsockServer::on_http_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_ping_handler(websocketpp::lib::bind(&CWsockServer::on_ping_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
-		m_endpoint.set_pong_handler(websocketpp::lib::bind(&CWsockServer::on_pong_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
-		m_endpoint.set_pong_timeout_handler(websocketpp::lib::bind(&CWsockServer::on_pong_timeout_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
-		m_endpoint.set_interrupt_handler(websocketpp::lib::bind(&CWsockServer::on_interrupt_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_validate_handler(websocketpp::lib::bind(&CWsockServer::on_validate_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_message_handler(websocketpp::lib::bind(&CWsockServer::on_message_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
+		m_endpoint.set_socket_init_handler(websocketpp::lib::bind(&CWsocksServer::on_socket_init_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_fail_handler(websocketpp::lib::bind(&CWsocksServer::on_fail_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_open_handler(websocketpp::lib::bind(&CWsocksServer::on_open_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_close_handler(websocketpp::lib::bind(&CWsocksServer::on_close_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_http_handler(websocketpp::lib::bind(&CWsocksServer::on_http_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_ping_handler(websocketpp::lib::bind(&CWsocksServer::on_ping_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
+		m_endpoint.set_pong_handler(websocketpp::lib::bind(&CWsocksServer::on_pong_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
+		m_endpoint.set_pong_timeout_handler(websocketpp::lib::bind(&CWsocksServer::on_pong_timeout_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
+		m_endpoint.set_interrupt_handler(websocketpp::lib::bind(&CWsocksServer::on_interrupt_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_validate_handler(websocketpp::lib::bind(&CWsocksServer::on_validate_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_message_handler(websocketpp::lib::bind(&CWsocksServer::on_message_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
 
 	}
-	CWsockServer(boost::asio::io_service & ios) {
+	CWsocksServer(boost::asio::io_service & ios) {
 		// Reset the log channels
 		m_endpoint.clear_access_channels(websocketpp::log::alevel::all);
 		m_endpoint.clear_error_channels(websocketpp::log::elevel::all);
@@ -88,19 +88,19 @@ public:
 		// Register handler callbacks
 		if (typeid(typename EndpointType) != typeid(asio_no_tls_server))
 		{
-			m_endpoint.set_tls_init_handler(websocketpp::lib::bind(&CWsockServer::on_tls_init_handler, this, websocketpp::lib::placeholders::_1));
+			m_endpoint.set_tls_init_handler(websocketpp::lib::bind(&CWsocksServer::on_tls_init_handler, this, websocketpp::lib::placeholders::_1));
 		}
-		m_endpoint.set_socket_init_handler(websocketpp::lib::bind(&CWsockServer::on_socket_init_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_fail_handler(websocketpp::lib::bind(&CWsockServer::on_fail_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_open_handler(websocketpp::lib::bind(&CWsockServer::on_open_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_close_handler(websocketpp::lib::bind(&CWsockServer::on_close_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_http_handler(websocketpp::lib::bind(&CWsockServer::on_http_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_ping_handler(websocketpp::lib::bind(&CWsockServer::on_ping_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
-		m_endpoint.set_pong_handler(websocketpp::lib::bind(&CWsockServer::on_pong_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
-		m_endpoint.set_pong_timeout_handler(websocketpp::lib::bind(&CWsockServer::on_pong_timeout_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
-		m_endpoint.set_interrupt_handler(websocketpp::lib::bind(&CWsockServer::on_interrupt_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_validate_handler(websocketpp::lib::bind(&CWsockServer::on_validate_handler, this, websocketpp::lib::placeholders::_1));
-		m_endpoint.set_message_handler(websocketpp::lib::bind(&CWsockServer::on_message_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
+		m_endpoint.set_socket_init_handler(websocketpp::lib::bind(&CWsocksServer::on_socket_init_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_fail_handler(websocketpp::lib::bind(&CWsocksServer::on_fail_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_open_handler(websocketpp::lib::bind(&CWsocksServer::on_open_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_close_handler(websocketpp::lib::bind(&CWsocksServer::on_close_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_http_handler(websocketpp::lib::bind(&CWsocksServer::on_http_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_ping_handler(websocketpp::lib::bind(&CWsocksServer::on_ping_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
+		m_endpoint.set_pong_handler(websocketpp::lib::bind(&CWsocksServer::on_pong_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
+		m_endpoint.set_pong_timeout_handler(websocketpp::lib::bind(&CWsocksServer::on_pong_timeout_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
+		m_endpoint.set_interrupt_handler(websocketpp::lib::bind(&CWsocksServer::on_interrupt_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_validate_handler(websocketpp::lib::bind(&CWsocksServer::on_validate_handler, this, websocketpp::lib::placeholders::_1));
+		m_endpoint.set_message_handler(websocketpp::lib::bind(&CWsocksServer::on_message_handler, this, websocketpp::lib::placeholders::_1, websocketpp::lib::placeholders::_2));
 
 	}
 
@@ -244,14 +244,14 @@ private:
 	typename EndpointType m_endpoint;
 };
 
-__inline static int wsockserver_main() {
+__inline static int wsocksserver_main() {
 	try {
 		// set up an external io_service to run both endpoints on. This is not
 		// strictly necessary, but simplifies thread management a bit.
 		boost::asio::io_service ios;
 
-		CWsockServer<asio_tls_server> server_tls_instance(ios);
-		CWsockServer<asio_no_tls_server> server_no_tls_instance(ios);
+		CWsocksServer<asio_tls_server> server_tls_instance(ios);
+		CWsocksServer<asio_no_tls_server> server_no_tls_instance(ios);
 
 		// Run the asio loop with the main thread
 		server_tls_instance.start(9002);
